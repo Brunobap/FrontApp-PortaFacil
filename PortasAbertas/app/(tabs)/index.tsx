@@ -12,10 +12,11 @@ export default function SplashScreen() {
     <ThemedView style={styles.container}>
       <ThemedView style={styles.titleContainer}>
         <Image style={styles.logo} source={require("@/assets/images/logo.png")} />
+        <ThemedText type='title' style={{fontSize: 40}}>PORTA FÁCIL</ThemedText>
       </ThemedView>
       <ThemedView style={styles.container}>
         <ThemedText type="title">Seja bem-vindo</ThemedText>
-        <BotaoVazado href={"./login"} legenda='Começar >' />
+        <BotaoVazado onPress={null} href={"./login"} legenda='Começar >' />
       </ThemedView>
     </ThemedView>
   );

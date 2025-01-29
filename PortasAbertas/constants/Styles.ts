@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     },
     logo: {
         height: "60%",
-        resizeMode: "contain"
+        resizeMode: "contain",
     },
     btnLink: {
         borderColor: Colors.verdeClaro,
