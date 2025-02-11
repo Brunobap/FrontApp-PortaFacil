@@ -2,32 +2,20 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import BotaoVazado from '@/components/BotaoVazado';
 import { ThemedText } from '@/components/ThemedText';
-import { Colors } from '@/constants/Colors';
+import { styles } from '@/constants/Styles';
 
-export default function BlocoPortas({ titulo, onPress }) {
+export default function BlocoPortas(props: {porta: {titulo: string, local: string, status: boolean}}) {
     return (
-        <View style={styles.section}>
-            <ThemedText type="subtitle" style={styles.subtitle}>{titulo}</ThemedText>
-            <View style={styles.buttonContainer}>
-                <BotaoVazado href={`/${titulo.toLowerCase().replace(/\s+/g, '-')}`} legenda="Solicitar Acesso" onPress={onPress} />
+        <View style={styles.roundBox}>
+            <ThemedText type="subtitle">{props.porta.titulo} - {props.porta.local}</ThemedText>
+            <ThemedText type="subtitle">Status: {props.porta.status ? "Aberto" : "Fechado"}</ThemedText>
+            <View>
+                <BotaoVazado
+                    href={`${props.porta.titulo.toLowerCase().replace(/\s+/g, '-')}`}
+                    legenda="Solicitar Acesso"
+                    size='peq'
+                    cor='blue' />
             </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    section: {
-        width: '100%',
-        alignItems: 'center',
-        marginBottom: 20,
-    },
-    subtitle: {
-        marginBottom: 10,
-        color: Colors.verdeClaro,
-        textAlign: 'center',
-    },
-    buttonContainer: {
-        width: '80%',
-        alignItems: 'center',
-    },
-});

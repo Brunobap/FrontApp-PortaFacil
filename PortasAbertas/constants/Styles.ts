@@ -5,6 +5,7 @@ import { Colors } from "./Colors";
 export const styles = StyleSheet.create({
     titleContainer: {
         height: "75%",
+        width:"100%",
         justifyContent: 'center',
         alignItems: "center",
         borderBottomEndRadius: 200,
@@ -31,11 +32,19 @@ export const styles = StyleSheet.create({
         height: "60%",
         resizeMode: "contain",
     },
-    btnLink: {
+    btnVazado: {
         borderColor: Colors.verdeClaro,
         borderWidth: 1,
         borderRadius: 15,
-        margin: 15,
+        margin: 5,
         padding: 15,
     },
+    roundBox: {
+        borderColor: "grey",
+        borderWidth: 1,
+        borderRadius: 20,
+        margin: 5,
+        paddingHorizontal: 10,
+    },
+
   });

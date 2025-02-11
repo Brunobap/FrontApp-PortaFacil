@@ -1,39 +1,31 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import BlocoPortas from '@/components/BlocoPortas';
+import {getPortas} from "@/scripts/api-portas";
+import { ThemedView } from '@/components/ThemedView';
+import { styles } from '@/constants/Styles';
+import { ScrollView } from 'react-native';
+ 
+export default async function UserPage() {
+    // Requisitar as portas disponíveis ao usuário para montar a tela
+    const arrayPortas = await getPortas();
 
-export default function UserPage() {
     const handleSolicitarAcesso = () => {
         console.log('Solicitar Acesso pressionado');
         // Lógica para solicitar acesso
     };
 
     return (
-        <View style={styles.container}>
-            <ThemedText type="title" style={styles.title}>Usuario</ThemedText>
+        <ThemedView style={styles.container}>
+            <ThemedText type="title" style={{color: Colors.verdeClaro}}>Usuario</ThemedText>
 
-            <BlocoPortas titulo="LATIN" onPress={handleSolicitarAcesso} />
-            <BlocoPortas titulo="SALA 6" onPress={handleSolicitarAcesso} />
-            <BlocoPortas titulo="ESPACO MAKER" onPress={handleSolicitarAcesso} />
-            <BlocoPortas titulo="SALA 10" onPress={handleSolicitarAcesso} />
-            <BlocoPortas titulo="LAB III INFORMÁTICA" onPress={handleSolicitarAcesso} />
-        </View>
+            <ScrollView style={styles.roundBox}>
+                { // Caixa com as portas do usuário
+                arrayPortas.map((porta) => 
+                    <BlocoPortas porta={porta}/>
+                )}
+            </ScrollView>
+        </ThemedView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: Colors.fundo,
-    },
-    title: {
-        marginBottom: 20,
-        color: Colors.verdeClaro,
-        textAlign: 'center',
-    },
-});

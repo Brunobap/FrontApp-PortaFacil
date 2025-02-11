@@ -6,6 +6,7 @@ import { styles } from '@/constants/Styles';
 import CaixaTextInput from '@/components/TextInput';
 import BotaoColorido from '@/components/BotaoVazado';
 import { Link } from 'expo-router';
+import BotaoVazado from '@/components/BotaoVazado';
 
 export default function Login() {
   function handlerLogar() {
@@ -29,7 +30,7 @@ export default function Login() {
       </ThemedView>
 
       {/* Botão para logar */}
-      <BotaoColorido legenda='Login >' href={'./'} onPress={() => handlerLogar()} />
+      <BotaoVazado legenda='Login >' href={'./user'} />
     </ThemedView>
   );
 }
