@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.verdeClaro
     },
     container: {
-        flex: 1,
+        height: "100%",
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -25,8 +25,10 @@ export const styles = StyleSheet.create({
     textInput: {
         fontSize: 20,
         borderRadius: 10,
-        backgroundColor: "white",
+        borderColor: "grey",
+        borderWidth: 2,
         width: "90%",
+        backgroundColor: "white",
     },
     logo: {
         height: "60%",
@@ -34,6 +36,7 @@ export const styles = StyleSheet.create({
     },
     btnVazado: {
         borderColor: Colors.verdeClaro,
+        justifyContent: "center",
         borderWidth: 1,
         borderRadius: 15,
         margin: 5,
@@ -44,7 +47,6 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 20,
         margin: 5,
-        paddingHorizontal: 10,
+        padding: 10,
     },
-
   });

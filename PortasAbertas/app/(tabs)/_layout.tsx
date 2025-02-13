@@ -1,16 +1,12 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen name="index" />
-      <Tabs.Screen name="login" />
-      <Tabs.Screen name="user" />
+      <Tabs.Screen name="index" options={{tabBarItemStyle: {display: 'none'}, tabBarStyle: {display: "none"}}}/>
+      <Tabs.Screen name="login" options={{tabBarItemStyle: {display: 'none'}, tabBarStyle: {display: "none"}}}/>
+      <Tabs.Screen name="user" options={{title: "Portas", tabBarHideOnKeyboard: true}}/>
     </Tabs>
   );
 }

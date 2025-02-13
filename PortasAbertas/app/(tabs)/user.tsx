@@ -18,7 +18,9 @@ export default async function UserPage() {
 
     return (
         <ThemedView style={styles.container}>
-            <ThemedText type="title" style={{color: Colors.verdeClaro}}>Usuario</ThemedText>
+            <ThemedView style={{marginTop: 30}}>
+                <ThemedText type="title" style={{color: Colors.verdeClaro, }}>*nome vai aqui*</ThemedText>
+            </ThemedView>
 
             <ScrollView style={styles.roundBox}>
                 { // Caixa com as portas do usuário
