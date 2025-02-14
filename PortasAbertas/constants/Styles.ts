@@ -36,17 +36,18 @@ export const styles = StyleSheet.create({
     },
     btnVazado: {
         borderColor: Colors.verdeClaro,
-        justifyContent: "center",
+        justifyContent: 'center',
         borderWidth: 1,
         borderRadius: 15,
         margin: 5,
-        padding: 15,
+        padding: 10,
     },
     roundBox: {
         borderColor: "grey",
         borderWidth: 1,
         borderRadius: 20,
         margin: 5,
-        padding: 10,
+        marginTop: 12,
+        padding: 5,
     },
   });

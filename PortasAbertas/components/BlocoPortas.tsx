@@ -9,12 +9,12 @@ export default function BlocoPortas(props: {porta: {titulo: string, local: strin
         <View style={styles.roundBox}>
             <ThemedText type="subtitle">{props.porta.titulo} - {props.porta.local}</ThemedText>
             <ThemedText type="subtitle">Status: {props.porta.status ? "Aberto" : "Fechado"}</ThemedText>
-            <View>
-                <BotaoVazado
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <BotaoVazado 
                     href={`${props.porta.titulo.toLowerCase().replace(/\s+/g, '-')}`}
                     legenda="Solicitar Acesso"
                     size='peq'
-                    cor='blue' />
+                    />
             </View>
         </View>
     );
