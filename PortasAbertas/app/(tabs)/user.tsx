@@ -6,14 +6,17 @@ import { getPortas } from "@/scripts/api-portas";
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
 import { ScrollView, View } from 'react-native';
-import SidebarMenu from '@/components/SidebarMenu'; // Importando o menu
+import SidebarMenu from '@/components/SidebarMenu'; 
+import BotaoRetornar from '@/components/BotaoRetornar';
 
 export default async function UserPage() {
     // Requisitar as portas disponíveis ao usuário para montar a tela
     const arrayPortas = await getPortas();
 
     return (
+        
         <ThemedView style={styles.container}>
+            <BotaoRetornar destino="login" />
             {/* Menu lateral */}
             <View style={{ position: 'absolute', top: 10, left: 10, zIndex: 10 }}>
                 <SidebarMenu />
@@ -32,6 +35,7 @@ export default async function UserPage() {
                     <BlocoPortas key={index} porta={porta} />
                 )}
             </ScrollView>
+            
         </ThemedView>
     );
 }

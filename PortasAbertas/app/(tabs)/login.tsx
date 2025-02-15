@@ -7,6 +7,7 @@ import CaixaTextInput from '@/components/TextInput';
 import BotaoVazado from '@/components/BotaoVazado';
 import { router } from 'expo-router';
 import { useState } from 'react';
+import BotaoRetornar from '@/components/BotaoRetornar';
 
 export default function Login() {
   function handlerLogar() {
@@ -23,6 +24,7 @@ export default function Login() {
 
   return (
     <ThemedView style={styles.container}>
+      <BotaoRetornar destino="index" />
       {/* Imagem e título da página */}
       <Image source={require("@/assets/images/imgLogin.png")} style={{width: '90%', resizeMode: "contain"}} />
       <ThemedText type='title' style={{marginVertical: 20}}>Login</ThemedText>

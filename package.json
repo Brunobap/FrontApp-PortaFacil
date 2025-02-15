@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@react-navigation/stack": "^7.1.1",
     "expo": "^52.0.35",
     "react-native-vector-icons": "^10.2.0"
   },

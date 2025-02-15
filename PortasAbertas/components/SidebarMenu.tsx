@@ -10,9 +10,10 @@ export default function SidebarMenu() {
     <ThemedView style={styles.container}>
       {/* Botão de menu */}
       <TouchableOpacity style={styles.menuButton} onPress={() => setIsOpen(!isOpen)}>
-        <Ionicons name="menu" size={24} />
+        <Ionicons name="menu" color = "white" size={24} />
       </TouchableOpacity>
 
+      //se for adm retornar:
       {/* Menu lateral */}
       {isOpen && (
         <ThemedView style={styles.menu}>
@@ -23,6 +24,16 @@ export default function SidebarMenu() {
         </ThemedView>
       )}
     </ThemedView>
+
+    //se for usuario retornar:
+    // {/* Menu lateral */}
+    //  {isOpen && (
+    //   <ThemedView style={styles.menu}>
+    //     <TouchableOpacity style={styles.menuItem}><Text style={styles.menuText}>Editar perfil</Text></TouchableOpacity>
+    //     <TouchableOpacity style={styles.menuItem}><Text style={styles.menuText}>Sair</Text></TouchableOpacity>
+    //    </ThemedView>
+    //  )}
+    // </ThemedView>
   );
 }
 
@@ -37,6 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   menu: {
+    backgroundColor: "white",
     position: "absolute",
     top: 50, 
     left: 50,
