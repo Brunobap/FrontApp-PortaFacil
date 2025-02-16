@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import BlocoPortas from '@/components/BlocoPortas';
@@ -6,29 +6,28 @@ import { getPortas } from "@/scripts/api-portas";
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
 import { ScrollView, View } from 'react-native';
-import SidebarMenu from '@/components/SidebarMenu'; // Importando o menu
+import BarraSuperior from '@/components/BarraSuperior';
+import arrayPortas from '@/dummies/obj-portas';
 
-export default async function UserPage() {
+export default function Portas() {
     // Requisitar as portas disponíveis ao usuário para montar a tela
-    const arrayPortas = await getPortas();
+    const [portas, setPortas] = useState<{"titulo": string, "local": string, "status": boolean, "tipoAcesso": string}[]>(arrayPortas);
+
+    // Simulação de requisição de usuários
+    useEffect(() => {
+        setPortas(arrayPortas);
+    }, [portas]);
+
+    // Pegar as informações do usuário
 
     return (
         <ThemedView style={styles.container}>
             {/* Menu lateral */}
-            <View style={{ position: 'absolute', top: 10, left: 10, zIndex: 10 }}>
-                <SidebarMenu />
-            </View>
-
-            {/* Título */}
-            <ThemedView style={{ marginTop: 30, alignItems: 'center' }}>
-                <ThemedText type="title" style={{ color: Colors.verdeClaro }}>
-                    *nome vai aqui*
-                </ThemedText>
-            </ThemedView>
+            <BarraSuperior titulo='Olá, * nome vai aqui *' show='menu'/>
 
             {/* Lista de portas */}
             <ScrollView style={styles.roundBox}>
-                {arrayPortas.map((porta, index) => 
+                {portas.map((porta, index) => 
                     <BlocoPortas key={index} porta={porta} />
                 )}
             </ScrollView>

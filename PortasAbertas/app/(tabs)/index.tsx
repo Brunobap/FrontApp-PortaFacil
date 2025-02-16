@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
-import BotaoVazado from '@/components/BotaoVazado';
+import BotaoVazado from '@/components/BotaoPersonalizado';
 
 export default function SplashScreen() {
   return (
@@ -14,7 +14,7 @@ export default function SplashScreen() {
       </ThemedView>
       <ThemedView style={{flex: 1, paddingVertical: 20}}>
         <ThemedText type="title">Seja bem-vindo</ThemedText>
-        <BotaoVazado href={"./login"} legenda='Começar >' />
+        <BotaoVazado type='title' href={"./login"} legenda='Começar >' />
       </ThemedView>
     </ThemedView>
   );

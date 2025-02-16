@@ -1,18 +1,22 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-import NotFoundScreen from '../+not-found';
-
 export default function TabLayout() {
+  const esconder = {tabBarItemStyle: {display: 'none'}, tabBarStyle: {display: "none"}}
 
   return (
     <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen name="index" />
-      <Tabs.Screen name="login" />
-      <Tabs.Screen name="user" />
-      <Tabs.Screen name="roomlist" />
+      {/* Telas individuais para fluxo de login */}
+      <Tabs.Screen name="index" options={{tabBarItemStyle: {display: 'none'}, tabBarStyle: {display: "none"}}}/>
+      <Tabs.Screen name="login" options={{tabBarItemStyle: {display: 'none'}, tabBarStyle: {display: "none"}}}/>
 
+      {/* Telas a mostra no meunu principal do aplicativo */}
+      <Tabs.Screen name="portas" />
+
+      {/* Telas acessíveis por botões específicos */}
+      <Tabs.Screen name="adm_room" />
+      <Tabs.Screen name="edit_user" />
+      <Tabs.Screen name="add_user" />
     </Tabs>
   );
 }

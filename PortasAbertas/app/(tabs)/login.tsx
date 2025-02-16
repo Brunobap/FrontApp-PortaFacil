@@ -3,8 +3,8 @@ import { Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
-import CaixaTextInput from '@/components/TextInput';
-import BotaoVazado from '@/components/BotaoVazado';
+import CaixaTextInput from '@/components/CaixaTextInput';
+import BotaoVazado from '@/components/BotaoPersonalizado';
 import { router } from 'expo-router';
 import { useState } from 'react';
 
@@ -14,7 +14,7 @@ export default function Login() {
 
 
     // Mandar ele pro painel se tiver funcionado
-    router.navigate("/user")
+    router.navigate("/portas")
   }
 
   // Estados para as entradas do usuário
@@ -34,7 +34,7 @@ export default function Login() {
       </ThemedView>
 
       {/* Botão para logar */}
-      <BotaoVazado legenda='Login >' onPress={() => handlerLogar()}/>
+      <BotaoVazado type='title' legenda='Login >' onPress={() => handlerLogar()}/>
     </ThemedView>
   );
 }

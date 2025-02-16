@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { ThemedView } from '@/components/ThemedView';
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { Colors } from "@/constants/Colors";
+import { ThemedText } from "./ThemedText";
 
 export default function SidebarMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,10 +18,10 @@ export default function SidebarMenu() {
       {/* Menu lateral */}
       {isOpen && (
         <ThemedView style={styles.menu}>
-          <TouchableOpacity style={styles.menuItem}><Text style={styles.menuText}>Painel usuários</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem}><Text style={styles.menuText}>Painel portas</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem}><Text style={styles.menuText}>Editar perfil</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem}><Text style={styles.menuText}>Sair</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}><ThemedText type="subtitle">Painel usuários</ThemedText></TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}><ThemedText type="subtitle">Painel portas</ThemedText></TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}><ThemedText type="subtitle">Editar perfil</ThemedText></TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}><ThemedText type="subtitle">Sair</ThemedText></TouchableOpacity>
         </ThemedView>
       )}
     </ThemedView>
@@ -31,9 +33,8 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   menuButton: {
-    top:20,
     padding: 10,
-    backgroundColor: "teal",
+    backgroundColor: Colors.verdeClaro,
     borderRadius: 5,
   },
   menu: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     left: 50,
     width: 180, 
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 5,
@@ -54,9 +55,5 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
-  },
-  menuText: {
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });
