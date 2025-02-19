@@ -4,61 +4,46 @@ import { Colors } from "./Colors";
 
 export const styles = StyleSheet.create({
     titleContainer: {
-        height: "75%",
-        width:"100%",
-        justifyContent: 'center',
-        alignItems: "center",
-        borderBottomEndRadius: 200,
-        borderBottomStartRadius: 200,
-        backgroundColor: Colors.verdeClaro
+      height: "75%",
+      width:"100%",
+      justifyContent: 'center',
+      alignItems: "center",
+      borderBottomEndRadius: 200,
+      borderBottomStartRadius: 200,
+      backgroundColor: Colors.verdeClaro
     },
     container: {
-<<<<<<< HEAD
-        height: "100%",
-        alignItems: 'center',
-        justifyContent: 'center',
-=======
       flex:1,
       backgroundColor: "white",
       width:"100%",
       alignItems: 'center',
       justifyContent: 'center',
->>>>>>> fix
     },
     contInput: {
-        width: "100%",  
-        alignItems: 'center',
-        marginVertical: 10,
+      width: "100%",  
+      alignItems: 'center',
+      marginVertical: 10,
     },
     textInput: {
-        fontSize: 20,
-        borderRadius: 10,
-        borderColor: "grey",
-        borderWidth: 2,
-        width: "90%",
-        backgroundColor: "white",
+      fontSize: 20,
+      borderRadius: 10,
+      borderColor: "grey",
+      borderWidth: 2,
+      width: "90%",
     },
     logo: {
-        height: "60%",
-        resizeMode: "contain",
+      height: "60%",
+      resizeMode: "contain",
     },
-    btnVazado: {
-        borderColor: Colors.verdeClaro,
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderRadius: 15,
-        margin: 5,
-        padding: 10,
+    btnPersonalizado: {
+      borderColor: Colors.verdeClaro,
+      borderWidth: 1,
+      borderRadius: 15,
+      alignItems:"center",
+      margin: 15,
+      padding: 15,
     },
     roundBox: {
-<<<<<<< HEAD
-        borderColor: "grey",
-        borderWidth: 1,
-        borderRadius: 20,
-        margin: 5,
-        marginTop: 12,
-        padding: 5,
-=======
       width:"90%",
       borderColor: "grey",
       borderWidth: 1,
@@ -120,6 +105,5 @@ export const styles = StyleSheet.create({
       justifyContent:"space-between", 
       width:"100%", 
       flexDirection: "row", 
->>>>>>> fix
     },
   });

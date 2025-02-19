@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import BotaoVazado from '@/components/BotaoVazado';
+import BotaoVazado from '@/components/BotaoPersonalizado';
 import { ThemedText } from '@/components/ThemedText';
 import { styles } from '@/constants/Styles';
 
