@@ -5,7 +5,10 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import NotFoundScreen from '../+not-found';
 
 export default function TabLayout() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> fix
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen name="index" />

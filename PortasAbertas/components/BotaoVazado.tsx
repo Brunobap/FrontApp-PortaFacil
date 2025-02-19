@@ -6,7 +6,11 @@ import { StyleSheet } from "react-native";
 import { BaseButton, GestureHandlerRootView } from "react-native-gesture-handler";
 
 
+<<<<<<< HEAD:PortasAbertas/components/BotaoVazado.tsx
 export default function BotaoVazado(props: {href?: string, legenda: string, onPress?: Function, size?: string, cor?: string}) {
+=======
+export default function BotaoPersonalizado(props: {href?: string, legenda: string, onPress?: Function, fundo?: any, type?: "link" | "title" | "default" | "defaultSemiBold" | "subtitle", cor?: ColorValue}) {
+>>>>>>> fix:PortasAbertas/components/BotaoPersonalizado.tsx
     var estiloLocal;
     // Trocar a cor da borda, se especificado
     if (props.cor != undefined) {
@@ -28,8 +32,13 @@ export default function BotaoVazado(props: {href?: string, legenda: string, onPr
         </Link>
     ) : (
         <GestureHandlerRootView>
+<<<<<<< HEAD:PortasAbertas/components/BotaoVazado.tsx
             <BaseButton onPress={() => props.onPress?.()} style={estiloLocal}>
                 <ThemedText type={props.size == "peq" ? "default" : "title"} style={{color: (props.cor == undefined ? Colors.verdeClaro : props.cor)}} >
+=======
+            <BaseButton onPress={() => props.onPress?.()} style={[estiloLocal, {backgroundColor: props.fundo ? cor : undefined}]}>
+                <ThemedText type={props.type} style={{justifyContent:"center", color: (props.fundo ? "white" : cor)}} >
+>>>>>>> fix:PortasAbertas/components/BotaoPersonalizado.tsx
                     {props.legenda}
                 </ThemedText>
             </BaseButton>
