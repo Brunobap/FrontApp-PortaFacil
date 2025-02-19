@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     },
     container: {
       flex:1,
+      backgroundColor: "white",
       width:"100%",
       alignItems: 'center',
       justifyContent: 'center',
@@ -50,15 +51,6 @@ export const styles = StyleSheet.create({
       margin: 5,
       marginTop: 12,
       padding: 5,
-    },
-    //AQUI COMEÇA O EditUser
-    saveButton: {
-      borderWidth: 2,
-      borderColor: '#28A085',
-      paddingVertical: 12,
-      borderRadius: 10,
-      alignItems: 'center',
-      marginBottom: 10,
     },
     input: {
       backgroundColor: 'white',
@@ -104,12 +96,14 @@ export const styles = StyleSheet.create({
       marginBottom: 10,
     },
     header: {
+      position: "relative",
+      zIndex: 10,
       marginTop: 30, 
       marginHorizontal: 10,
-      paddingHorizontal: 10,
+      paddingHorizontal: 30,
       alignItems: 'center', 
-      justifyContent:"space-around", 
+      justifyContent:"space-between", 
       width:"100%", 
-      flexDirection: "row" 
+      flexDirection: "row", 
     },
   });

@@ -2,8 +2,6 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 export default function TabLayout() {
-  const esconder = {tabBarItemStyle: {display: 'none'}, tabBarStyle: {display: "none"}}
-
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       {/* Telas individuais para fluxo de login */}

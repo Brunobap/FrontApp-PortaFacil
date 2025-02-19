@@ -4,9 +4,9 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
 import CaixaTextInput from '@/components/CaixaTextInput';
-import BotaoVazado from '@/components/BotaoPersonalizado';
 import { router } from 'expo-router';
 import { useState } from 'react';
+import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 
 export default function Login() {
   function handlerLogar() {
@@ -14,7 +14,7 @@ export default function Login() {
 
 
     // Mandar ele pro painel se tiver funcionado
-    router.navigate("/portas")
+    router.navigate("/(tabs)/portas")
   }
 
   // Estados para as entradas do usuário
@@ -34,7 +34,7 @@ export default function Login() {
       </ThemedView>
 
       {/* Botão para logar */}
-      <BotaoVazado type='title' legenda='Login >' onPress={() => handlerLogar()}/>
+      <BotaoPersonalizado type='title' legenda='Login >' onPress={() => handlerLogar()}/>
     </ThemedView>
   );
 }

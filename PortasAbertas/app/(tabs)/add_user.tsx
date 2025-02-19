@@ -3,7 +3,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
 import BarraSuperior from '@/components/BarraSuperior';
 import CaixaTextInput from '@/components/CaixaTextInput';
-import BotaoVazado from '@/components/BotaoPersonalizado';
+import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 
 export default function AdicionarUsuarioScreen() {
   const [nomeUsuario, setNomeUsuario] = useState('');
@@ -17,7 +17,7 @@ export default function AdicionarUsuarioScreen() {
         <CaixaTextInput legenda='Usuário' onChange={setNomeUsuario} value={nomeUsuario} />
 
         {/* Botão Adicionar */}
-        <BotaoVazado legenda='Adicionar >' type='title' />
+        <BotaoPersonalizado legenda='Adicionar >' type='title' />
       </ThemedView>
     </ThemedView>
   );

@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import { ScrollView, View, TextInput, TouchableOpacity } from 'react-native';
-import { ThemedText } from '@/components/ThemedText';
-import { Colors } from '@/constants/Colors';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
-import SidebarMenu from '@/components/SidebarMenu'; // Importando o menu
 import BarraSuperior from '@/components/BarraSuperior';
 import CaixaTextInput from '@/components/CaixaTextInput';
-import BotaoVazado from '@/components/BotaoPersonalizado';
+import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 
 export default function EditarUsuarioScreen() {
   const [emailUsuario, setEmailUsuario] = useState('douglas@gmail.com');
@@ -15,16 +11,16 @@ export default function EditarUsuarioScreen() {
   return (
     <ThemedView style={styles.container}>
       {/* Barra Superior, com botão de voltar */}
-      <BarraSuperior titulo='EDITAR USUÁRIO' show="voltar"/>
+      <BarraSuperior titulo='EDITAR USUÁRIO' show="voltar" destinoVoltar=''/>
 
       {/* Formulário */}
       <ThemedView style={[styles.roundBox, {flex:1}]}>
+        {/* Caixa de input do usuário */}
         <CaixaTextInput legenda='Usuário' onChange={setEmailUsuario} value={emailUsuario} tipo='email-address' />
-
         {/* Botão Salvar */}
-        <BotaoVazado legenda='Salvar Usuário' type='subtitle' />
+        <BotaoPersonalizado legenda='Salvar Usuário' type='subtitle' />
         {/* Botão Deletar */}
-        <BotaoVazado legenda='Deletar Usuário' fundo cor={Colors.verdeClaro} type='subtitle' />
+        <BotaoPersonalizado legenda='Deletar Usuário' fundo type='subtitle' />
       </ThemedView>
     </ThemedView>
   );

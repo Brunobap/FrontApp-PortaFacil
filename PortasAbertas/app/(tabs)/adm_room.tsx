@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
-import { Colors } from '@/constants/Colors';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
-import SidebarMenu from '@/components/SidebarMenu'; // Menu lateral
 import BlocoUsuario  from '@/components/BlocoUsuario'; // Componente de usuários
-import Ionicons from 'react-native-vector-icons/Ionicons'; // Ícone para o botão
 import BarraSuperior from '@/components/BarraSuperior';
-import BotaoVazado from '@/components/BotaoPersonalizado';
+import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 
 export default function AdministrarSalaScreen() {
   const [usuarios, setUsuarios] = useState<{ id: string; nome: string }[]>([]);
@@ -24,14 +21,14 @@ export default function AdministrarSalaScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <BarraSuperior titulo="Administrar sala" show="menu" />
+      <BarraSuperior titulo="Administrar sala" show="voltar"/>
 
       {/* Conteúdo */}
       <ScrollView style={styles.roundBox}>
         {/* Cabeçalho da lista */}
         <ThemedView style={styles.header}>
           <ThemedText type='title'>LATIN</ThemedText>
-          <BotaoVazado type="subtitle" legenda='+ Adicionar Usuário' />
+          <BotaoPersonalizado fundo type="subtitle" legenda='+ Adicionar Usuário' />
         </ThemedView>
 
         {/* Lista de usuários */}
