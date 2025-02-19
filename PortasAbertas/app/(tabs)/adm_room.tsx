@@ -21,14 +21,14 @@ export default function AdministrarSalaScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <BarraSuperior titulo="Administrar sala" show="voltar"/>
+      <BarraSuperior titulo="ADMINISTRAR SALA" show="voltar"/>
 
       {/* Conteúdo */}
       <ScrollView style={styles.roundBox}>
         {/* Cabeçalho da lista */}
         <ThemedView style={styles.header}>
           <ThemedText type='title'>LATIN</ThemedText>
-          <BotaoPersonalizado fundo type="subtitle" legenda='+ Adicionar Usuário' />
+          <BotaoPersonalizado fundo type="defaultSemiBold" legenda='+ Adicionar Usuário' />
         </ThemedView>
 
         {/* Lista de usuários */}

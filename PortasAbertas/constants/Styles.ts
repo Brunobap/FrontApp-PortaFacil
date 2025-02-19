@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
       marginVertical: 10,
     },
     textInput: {
+      padding:10, 
       fontSize: 20,
       borderRadius: 10,
       borderColor: "grey",

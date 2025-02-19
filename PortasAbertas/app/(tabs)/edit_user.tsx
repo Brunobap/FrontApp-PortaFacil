@@ -4,6 +4,7 @@ import { styles } from '@/constants/Styles';
 import BarraSuperior from '@/components/BarraSuperior';
 import CaixaTextInput from '@/components/CaixaTextInput';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
+import { View } from 'react-native';
 
 export default function EditarUsuarioScreen() {
   const [emailUsuario, setEmailUsuario] = useState('douglas@gmail.com');
@@ -11,17 +12,26 @@ export default function EditarUsuarioScreen() {
   return (
     <ThemedView style={styles.container}>
       {/* Barra Superior, com botão de voltar */}
-      <BarraSuperior titulo='EDITAR USUÁRIO' show="voltar" destinoVoltar=''/>
+      <BarraSuperior titulo='EDITAR USUÁRIO' show='voltar' destinoVoltar='' />
 
-      {/* Formulário */}
-      <ThemedView style={[styles.roundBox, {flex:1}]}>
+      {/* Formulário centralizado */}
+      <ThemedView style={[styles.roundBox, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
+        
         {/* Caixa de input do usuário */}
         <CaixaTextInput legenda='Usuário' onChange={setEmailUsuario} value={emailUsuario} tipo='email-address' />
+
         {/* Botão Salvar */}
-        <BotaoPersonalizado legenda='Salvar Usuário' type='subtitle' />
+        <View style={{ marginTop: 15, width: '100%'}}>
+          <BotaoPersonalizado legenda='Salvar Usuário' type='subtitle' />
+        </View>
+
         {/* Botão Deletar */}
-        <BotaoPersonalizado legenda='Deletar Usuário' fundo type='subtitle' />
+        <View style={{ marginTop: 10, width: '100%'}}>
+          <BotaoPersonalizado legenda='Deletar Usuário' fundo type='subtitle' />
+        </View>
+
       </ThemedView>
     </ThemedView>
   );
 }
+
