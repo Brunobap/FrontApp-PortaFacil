@@ -7,6 +7,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 //como usar: chamar na pagina onde o botao vai aparecer:     <BotaoRetornar destino="nome da pagina onde deve ir" />
 // add pagina no RootStackPAramList exemplo:   login: undefined;
 //add import BotaoRetornar from '@/components/BotaoRetornar'; na pagina onde o botao vai aparecer
+//teste
 
 // Define o tipo para as rotas da navegação
 type RootStackParamList = {
