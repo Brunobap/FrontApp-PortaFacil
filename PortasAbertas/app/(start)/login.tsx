@@ -7,11 +7,22 @@ import CaixaTextInput from '@/components/CaixaTextInput';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
   function handlerLogar() {
     // Fazer a verificação dos dados do usuário
 
+    // Montar a requisição para o backend
+
+    // Enviar o endpoint
+
+    // Pegar o resultado como informação de autenticação e salvar com persistência
+    AsyncStorage.setItem("authUser", "alo alo")
+    // E as informações pessoais do usuário
+    AsyncStorage.setItem("nomeUsuario", "fulaneto")
+    AsyncStorage.setItem("emailUsuario", "batata@123")
+    AsyncStorage.setItem("nivelUsuario", "admin")
 
     // Mandar ele pro painel se tiver funcionado
     router.navigate("/(tabs)/portas")

@@ -27,7 +27,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <Stack>
+        <Stack.Screen name="(start)" options={{headerShown: false}}/>
         <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
+        <Stack.Screen name="(hidden)" options={{headerShown: false}}/>
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style={'light'} />

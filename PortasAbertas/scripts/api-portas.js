@@ -1,8 +1,8 @@
 
 // Objetos para teste
-import arrayPortas from "@/dummies/obj-portas";
-
-export async function getPortas(req) {
+import { arrayPortas } from "@/constants/dummies"
+ 
+export function getPortas(req) {
     // Por hora, só devolve o objeto estático em dummies
     return arrayPortas
 }

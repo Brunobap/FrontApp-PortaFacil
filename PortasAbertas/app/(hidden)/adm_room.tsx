@@ -6,18 +6,20 @@ import { styles } from '@/constants/Styles';
 import BlocoUsuario  from '@/components/BlocoUsuario'; // Componente de usuários
 import BarraSuperior from '@/components/BarraSuperior';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
+import { objUser } from '@/constants/Types';
+import { GetAdminsRoom } from '@/scripts/api-room';
+import { useLocalSearchParams } from 'expo-router';
 
 export default function AdministrarSalaScreen() {
-  const [usuarios, setUsuarios] = useState<{ id: string; nome: string }[]>([]);
+  const [usuarios, setUsuarios] = useState<objUser[]>([]);
 
   // Simulação de requisição de usuários
   useEffect(() => {
-    setUsuarios([
-      { id: '1', nome: 'DOUGLAS' },
-      { id: '2', nome: 'DOUGLAS' },
-      { id: '3', nome: 'DOUGLAS' },
-    ]);
-  }, []);
+    setUsuarios(GetAdminsRoom());
+  }, [usuarios]);
+
+  // Pegar o nome da porta pela propriedade do link
+  const { sala } = useLocalSearchParams<{ sala?: string; }>();
 
   return (
     <ThemedView style={styles.container}>
@@ -26,15 +28,13 @@ export default function AdministrarSalaScreen() {
       {/* Conteúdo */}
       <ScrollView style={styles.roundBox}>
         {/* Cabeçalho da lista */}
-        <ThemedView style={styles.header}>
-          <ThemedText type='title'>LATIN</ThemedText>
-          <BotaoPersonalizado fundo type="defaultSemiBold" legenda='+ Adicionar Usuário' />
+        <ThemedView style={{flex:1, flexDirection:'row', justifyContent:'space-evenly', alignItems:'center'}}>
+          <ThemedText type='title'>{sala}</ThemedText>
+          <BotaoPersonalizado href={`add_user?sala=${sala}`} fundo type="defaultSemiBold" legenda='+ Adicionar Usuário' />
         </ThemedView>
 
         {/* Lista de usuários */}
-        {usuarios.map((user) => (
-          <BlocoUsuario key={user.id} nome={user.nome} />
-        ))}
+        {usuarios.map((user) => <BlocoUsuario key={user.id} user={user} />)}
       </ScrollView>
     </ThemedView>
   );

@@ -1,41 +1,21 @@
+
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Ícone da seta
+import { ThemedText } from './ThemedText';
+import { Link } from 'expo-router';
+import { objUser } from '@/constants/Types';
+import { styles } from '@/constants/Styles';
 
 // Definição das props esperadas
 interface BlocoUsuarioProps {
-  nome: string;
+  user: objUser;
 }
 
-export default function BlocoUsuario({ nome }: BlocoUsuarioProps) {
+export default function BlocoUsuario({ user }: BlocoUsuarioProps) {
   return (
-    <View style={styles.card}>
-      <Text style={styles.cardText}>{nome}</Text>
-      <TouchableOpacity>
-        <Ionicons name="chevron-forward" size={24} color="#000" />
-      </TouchableOpacity>
-    </View>
+    <Link href={`/edit_user?id=${user.id}`} style={styles.card}>
+      <ThemedText type='defaultSemiBold'>{user.nome}</ThemedText>
+      <Ionicons name="chevron-forward" size={24} color="#000" />
+    </Link>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3, // Sombra para Android
-  },
-  cardText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-});
