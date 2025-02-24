@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { TouchableOpacity, View, Text, StyleSheet, Modal, FlatList } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Colors } from "@/constants/Colors";
+
+// como usar:  no export defaut adicione: const [usuarioSelecionado, setUsuarioSelecionado] = useState("");
+// No retorno add:  {/* Seletor de usuário */}
+//      <SeletorUsuario onSelect={setUsuarioSelecionado} />
 
 interface SeletorUsuarioProps {
   onSelect: (usuario: string) => void;
@@ -49,7 +52,7 @@ export default function SeletorUsuario({ onSelect }: SeletorUsuarioProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "80%",
+    width: "90%",
     alignItems: "center",
     marginBottom: 20,
   },
@@ -62,12 +65,13 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
+    marginVertical: 50,
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 8,
+    shadowRadius: 8,
   },
   texto: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
   },
   modalContainer: {

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+
+//como usar: na pagina use: import PasswordInput from '@/components/PasswordInput';
+// no returno use: <PasswordInput placeholder="Senha" value={senha} onChangeText={setSenha} />
+
 // Definição das props com tipos
 interface PasswordInputProps {
   placeholder?: string; // Opcional
@@ -30,14 +34,17 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ placeholder = "Digite sua
 
 const styles = StyleSheet.create({
   container: {
+    padding:10,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 2,
     borderColor: "grey",
     borderRadius: 10,
-    paddingHorizontal: 10,
-    height: 50,
+    marginStart:13,
+    height: 55,
+    width: "90%",
   },
+
   input: {
     flex: 1,
     height: 40,
