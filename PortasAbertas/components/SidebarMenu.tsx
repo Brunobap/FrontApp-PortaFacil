@@ -14,39 +14,39 @@ export default function SidebarMenu() {
   function toggleMenu() { setIsOpen(!isOpen) }
 
   function deslogar() {
-    // Fechar a caixa do menu
-    setIsOpen(false)
-
-    // Tirar a autenticação do usuário
-    AsyncStorage.multiRemove(["authUser", "nomeUsuario", "emailUsuario", "nivelUsuario"])
-
-    // Navegar de volta a tela de login
-    router.navigate("/")
+    setIsOpen(false);
+    AsyncStorage.multiRemove(["authUser", "nomeUsuario", "emailUsuario", "nivelUsuario"]);
+    router.navigate("/");
   }
 
-  // Pegar informação do usuário (se ele é admin ou não)
   const [isAdmin, setIsAdmin] = useState<boolean>();
   useEffect(() => {
     const user = userAdm;
-    setIsAdmin(user.nivel === "admin")
-  }, [isAdmin])
+    setIsAdmin(user.nivel === "admin");
+  }, [isAdmin]);
 
   return (
-    <ThemedView style={{position:"relative", zIndex: 10}}>
-      {/* Botão de menu */}
+    <ThemedView style={{ position: "relative", zIndex: 10 }}>
       <Ionicons name="menu" onPress={toggleMenu} color={Colors.verdeClaro} size={50} />
 
-      {/* Menu lateral */}
       {isOpen && (
         <ThemedView style={styles.menu}>
-          { // Esses botões só aparecem quando tem permissão de admin
-            isAdmin ? [
-              <Link style={styles.menuItem} key={1} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Painel usuários</ThemedText></Link>,
-              <Link style={styles.menuItem} key={2} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Painel portas</ThemedText></Link>              
-            ] : <></>
-          }
-          <Link style={styles.menuItem} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Editar perfil</ThemedText></Link>
-          <TouchableOpacity style={styles.menuItem} onPress={deslogar}><ThemedText type="subtitle">Sair</ThemedText></TouchableOpacity>
+          {isAdmin && (
+            <>
+              <Link style={styles.menuItem} key={1} onPress={toggleMenu} href="/(hidden)/painel_usuarios">
+                <ThemedText type="subtitle">Painel usuários</ThemedText>
+              </Link>
+              <Link style={styles.menuItem} key={2} onPress={toggleMenu} href="/(hidden)/painel_portas">
+                <ThemedText type="subtitle">Painel portas</ThemedText>
+              </Link>
+            </>
+          )}
+          <Link style={styles.menuItem} onPress={toggleMenu} href={"/(hidden)/edit_user"}>
+            <ThemedText type="subtitle">Editar perfil</ThemedText>
+          </Link>
+          <TouchableOpacity style={styles.menuItem} onPress={deslogar}>
+            <ThemedText type="subtitle">Sair</ThemedText>
+          </TouchableOpacity>
         </ThemedView>
       )}
     </ThemedView>
@@ -54,18 +54,18 @@ export default function SidebarMenu() {
 }
 
 const styles = StyleSheet.create({
-  menu: {    
+  menu: {
     position: "absolute",
     zIndex: 10,
-    top: 50, 
-    width: 200, 
+    top: 50,
+    width: 200,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
     borderRadius: 5,
     backgroundColor: "white",
-    alignItems:"center",
+    alignItems: "center",
   },
   menuItem: {
     alignItems: "center",
@@ -74,3 +74,4 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ddd",
   },
 });
+

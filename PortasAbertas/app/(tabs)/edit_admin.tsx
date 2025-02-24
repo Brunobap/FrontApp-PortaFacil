@@ -6,12 +6,22 @@ import CaixaTextInput from '@/components/CaixaTextInput';
 import SeletorUsuario from '@/components/SeletorUsuario';
 import { View } from 'react-native';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
-
+import { useLocalSearchParams } from 'expo-router'; 
 
 export default function EditarUsuarioScreen() {
   // Estados dos campos
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [usuarioSelecionado, setUsuarioSelecionado] = useState("");
+
+  // Acessa os parâmetros passados na navegação
+  const { nome } = useLocalSearchParams();
+
+  // Preenche o campo "Nome" com o valor passado como parâmetro
+  React.useEffect(() => {
+    if (nome) {
+      setNomeUsuario(nome.toString());
+    }
+  }, [nome]);
 
   return (
     <ThemedView style={styles.container}>
@@ -31,14 +41,12 @@ export default function EditarUsuarioScreen() {
           onChange={setNomeUsuario}
           value={nomeUsuario}
         />
-      <SeletorUsuario onSelect={setUsuarioSelecionado} />
+        <SeletorUsuario onSelect={setUsuarioSelecionado} />
 
-      {/* Botão Salvar */}
-      {/* Ao clicar no botão Salvar, a aplicação deve enviar os dados atualizados do formulário para a API.*/}
-      <View style={{ marginTop: 20, width: '100%',}}>
-        <BotaoPersonalizado legenda="Salvar" type="title" />
-      </View>
-    
+        {/* Botão Salvar */}
+        <View style={{ marginTop: 20, width: '100%' }}>
+          <BotaoPersonalizado legenda="Salvar" type="title" />
+        </View>
       </ThemedView>
     </ThemedView>
   );
