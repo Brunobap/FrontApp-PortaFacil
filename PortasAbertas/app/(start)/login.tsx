@@ -1,16 +1,16 @@
 import { Image } from 'react-native';
-
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
 import CaixaTextInput from '@/components/CaixaTextInput';
+import PasswordInput from '@/components/PasswordInput'; // Importando o novo componente
 import { router } from 'expo-router';
 import { useState } from 'react';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
-  function handlerLogar() {
+   function handlerLogar() {
     // Fazer a verificação dos dados do usuário
 
     // Montar a requisição para o backend
@@ -33,19 +33,20 @@ export default function Login() {
   const [senha, setSenha] = useState("");
 
   return (
-    <ThemedView style={styles.container}>
+     <ThemedView style={styles.container}>
       {/* Imagem e título da página */}
       <Image source={require("@/assets/images/imgLogin.png")} style={{width: '90%', resizeMode: "contain"}} />
       <ThemedText type='title' style={{marginVertical: 20}}>Login</ThemedText>
 
+
       {/* Caixas de entrada de texto */}
-      <ThemedView style={{width:"100%"}}>
-        <CaixaTextInput tipo='number-pad'  onChange={setID} value={id} legenda={"RA/CPF"} />
-        <CaixaTextInput tipo="visible-password" onChange={setSenha} value={senha} legenda={"Senha"} />
+      <ThemedView style={{width:"80%"}}>
+        <CaixaTextInput tipo='number-pad' onChange={setID} value={id} legenda={"RA/CPF"} />
+        <PasswordInput placeholder="Senha" value={senha} onChangeText={setSenha} />
       </ThemedView>
 
       {/* Botão para logar */}
-      <BotaoPersonalizado type='title' legenda='Login >' onPress={() => handlerLogar()}/>
+      <BotaoPersonalizado type='title' legenda='Login >' onPress={() => handlerLogar()} />
     </ThemedView>
   );
 }
