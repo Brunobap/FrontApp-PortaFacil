@@ -15,6 +15,9 @@ export async function CheckLogin (req){
         
     // Não fazer nada, a mensagem de resposta vai pro console sozinha
     } catch (erro) {}
+
+    console.log(valor);
+    
     
     // Olhar o status da resposta
     const status = valor.status;

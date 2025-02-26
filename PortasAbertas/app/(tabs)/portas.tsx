@@ -16,7 +16,7 @@ export default function Portas() {
 
     // E as informações do usuário que serão usadas
     const [nome, setNome] = useState<string>("* nome vai aqui*");
-    const [nivel, setNivel] = useState<string>("padrao");
+    const [isAdmin, setAdmin] = useState<boolean>(false);
 
     useEffect(() => {
         if (portas != undefined) return
@@ -39,21 +39,34 @@ export default function Portas() {
             } else setPortas(portas)
     
             // Pedir as informações do usuário no backend, também
-            AsyncStorage.getItem("ra").then(valor => {if (valor != null) setNome(valor)})
+            AsyncStorage.getItem("ra").then(valor => {
+                if (valor != null) {
+                    setNome(valor)
+                    // Ver se o usuário tá na lista de admins
+                    for (var i=0; i<portas.length; i++){
+                        const porta = portas[i]
+                        for(var j=0; i<porta.admin.length; i++) {
+                            // Se a pessoa for administrador tem acesso livre a porta
+                            const element = porta.admin[i].user
+                            if (element == valor){
+                                setAdmin(true)
+                                break
+                            }
+                        };
+                    }
+                }
+            })
         })
     })
 
     return (
         <ThemedView style={styles.container}>
             {/* Menu lateral */}
-            <BarraSuperior titulo={`Olá, ${nome}`} show='menu'/>
+            <BarraSuperior titulo={`Olá, ${nome}`} show={isAdmin ? 'menu-comp' : 'menu'}/>
 
             {/* Lista de portas */}
             <ScrollView style={styles.roundBox}>
-                {portas != undefined ? portas.map((porta) => <BlocoPortas porta={porta} />) : <ThemedText type='title'>Não há portas cadastradas para você</ThemedText>}
-                    
-                {// Caso o usuário seja um admin, ele tem o poder de adicionar portas
-                nivel == "administrador" ? <BotaoPersonalizado fundo legenda='+ Adicionar'/> : <></>
+                {portas != undefined ? portas.map((porta) => <BlocoPortas porta={porta} />) : <ThemedText type='title'>Não há portas cadastradas para você</ThemedText>
                 }
             </ScrollView>
         </ThemedView>

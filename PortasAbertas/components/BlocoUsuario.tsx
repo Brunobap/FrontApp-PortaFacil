@@ -13,8 +13,8 @@ interface BlocoUsuarioProps {
 
 export default function BlocoUsuario({ user }: BlocoUsuarioProps) {
   return (
-    <Link href={`/edit_user?id=${user.id}`} style={styles.card}>
-      <ThemedText type='defaultSemiBold'>{user.nome}</ThemedText>
+    <Link href={`/edit_user?user=${user.user}`} style={styles.card}>
+      <ThemedText type='defaultSemiBold'>{user.user}</ThemedText>
       <Ionicons name="chevron-forward" size={24} color="#000" />
     </Link>
   );

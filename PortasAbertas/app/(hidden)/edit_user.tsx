@@ -35,7 +35,7 @@ export default function EditarUsuarioScreen() {
   return (
     <ThemedView style={styles.container}>
       {/* Barra Superior, com botão de voltar */}
-      <BarraSuperior titulo='EDITAR USUÁRIO' show='voltar' destinoVoltar={`/adm_door?porta=${porta}`} />
+      <BarraSuperior titulo='EDITAR USUÁRIO' show='voltar' />
 
       {/* Formulário centralizado */}
       <ThemedView style={[styles.roundBox, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>

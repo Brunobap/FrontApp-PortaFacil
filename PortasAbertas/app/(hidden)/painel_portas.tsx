@@ -31,7 +31,7 @@ export default function PainelPortas() {
                         {/* Botão EDITAR */}
                         <BotaoPersonalizado
                             legenda="EDITAR"
-                            href="/(tabs)\edit_portas" // Navega para a página de edição
+                            href="../(tabs)/edit_portas" // Navega para a página de edição
                         />
                     </ThemedView>
                 ))}

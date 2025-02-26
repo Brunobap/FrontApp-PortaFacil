@@ -1,27 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import BotaoVazado from '@/components/BotaoPersonalizado';
 import { ThemedText } from '@/components/ThemedText';
 import { styles } from '@/constants/Styles';
-import { objUser, objSala } from '@/constants/Types';
-import { router } from 'expo-router';
+import { objSala } from '@/constants/Types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { abrir, getStatus } from '@/scripts/api-portas';
 
 export default function BlocoPortas(props: {porta: objSala}) {
     const objPorta = props.porta.iotobjects[0]
-    const cor = (objPorta.status == "Aberto" ? "green" : "red")
+    const [status, setStatus] = useState(objPorta.status)
+    const cor = (status == "ABERTA" ? "green" : "red")
+
+    const atualizaStatus = async () => {
+        AsyncStorage.getItem("accessToken").then(async token => {
+            // Pedir as portas ao backend
+            const resposta = await getStatus(token)            
+            setStatus(resposta.status)
+        })
+    }
+    useEffect(() => {
+        atualizaStatus()
+    }, [])
     
     // Nome do usuário, para comparação
-    var nome: string | null
-    nome = ""
-    AsyncStorage.getItem("ra").then(valor => {nome = valor})
+    const [nome, setNome] = useState<string | null>("")
+    AsyncStorage.getItem("ra").then(valor => setNome(valor))
 
-    var tipoAcesso = 'bloq'
+    var tipoAcesso = 'bloq'    
     for(var i=0; i<props.porta.users.length; i++) {
-        // Se a pessoa for usuário dessa porta ele tem acesso livre, pelo menos        
+        // Se a pessoa for administrador tem acesso livre a porta
         const element = props.porta.users[i].user
         if (element == nome){
-            tipoAcesso = 'livre'
+            tipoAcesso = 'livre'            
+            break
+        }
+    };
+    for(var i=0; i<props.porta.department.coordinators.length; i++) {
+        // Se a pessoa for administrador tem acesso livre a porta
+        const element = props.porta.department.coordinators[i].user        
+        if (element == nome){
+            tipoAcesso = 'admin'            
             break
         }
     };
@@ -29,7 +48,7 @@ export default function BlocoPortas(props: {porta: objSala}) {
         // Se a pessoa for administrador tem acesso livre a porta
         const element = props.porta.admin[i].user
         if (element == nome){
-            tipoAcesso = 'admin'
+            tipoAcesso = 'admin'            
             break
         }
     };
@@ -37,7 +56,7 @@ export default function BlocoPortas(props: {porta: objSala}) {
     return (
         <View style={styles.roundBox}>
             <ThemedText type="subtitle">{props.porta.name} - {props.porta.department.name}</ThemedText>
-            <ThemedText type="subtitle" style={{color: cor}}>Status: {objPorta.status}</ThemedText>
+            <ThemedText type="subtitle" style={{color: cor}}>Status: {status}</ThemedText>
             <View style={{ flex: 1, flexDirection: "row" }}>
                 {[
                   tipoAcesso === "bloq" ? <BotaoSolicitar/> : <></>,
@@ -55,7 +74,7 @@ export default function BlocoPortas(props: {porta: objSala}) {
     function BotaoSolicitar() {
         return (
             <BotaoVazado fundo
-                href={`../(hidden)/${objPorta.mac}`}
+                /*href={`../(hidden)/${props.porta.code}`}*/
                 cor={"red"}
                 legenda="Solicitar Acesso"
                 type='defaultSemiBold'
@@ -65,7 +84,7 @@ export default function BlocoPortas(props: {porta: objSala}) {
     function BotaoAdmin() {
         return (
             <BotaoVazado fundo
-                href={`../(hidden)/adm_door?porta=${objPorta.mac}`}
+                href={`../(hidden)/adm_door?id=${props.porta.id}`}
                 cor={"blue"}
                 legenda="Administrar"
                 type='defaultSemiBold'
@@ -75,11 +94,10 @@ export default function BlocoPortas(props: {porta: objSala}) {
     function BotaoAbrir() {
         function AbrirPorta(id: number) {
             // Montar a requisição do backend
-
-            // Enviar ao endpoint
-
-            // Atualizar a tela
-            router.reload()
+            AsyncStorage.getItem("accessToken").then(async token => {
+                // Pedir as portas ao backend
+                const portas = await abrir(token)
+            })
         }
 
         return (

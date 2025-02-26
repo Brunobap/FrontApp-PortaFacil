@@ -15,22 +15,18 @@ export default function PainelUsuarios() {
         { nome: 'SILVIO', tipo: 'PORTARIA' }
     ]);
 
-    const [nivel, setNivel] = useState<String | null>("");
-
-    useEffect(() => {
-        AsyncStorage.getItem("nivelUsuario").then((valor) => setNivel(valor));
-    }, []);
+    const [nivel, setNivel] = useState<String | null>("ADMIN");
 
     // Função para determinar se o botão "EDITAR" deve ser exibido
     const deveExibirBotaoEditar = (usuarioTipo: string) => {
         // Exemplo de regra: só exibe o botão "EDITAR" para usuários do tipo "ADMIN" ou "PORTARIA"
-        return nivel === "admin" && (usuarioTipo === "ALUNO" || usuarioTipo === "PORTARIA");
+        return nivel === "ADMIN" && (usuarioTipo === "ALUNO" || usuarioTipo === "PORTARIA");
     };
 
     return (
         <ThemedView style={styles.container}>
             {/* Barra superior com botão de retornar */}
-            <BarraSuperior titulo="Painel Usuários" show='voltar' destinoVoltar="/(tabs)\portas" />
+            <BarraSuperior titulo="Painel Usuários" show='voltar' destinoVoltar="\(tabs)\portas" />
 
             {/* Lista de usuários */}
             <ScrollView style={styles.roundBox}>
@@ -38,12 +34,13 @@ export default function PainelUsuarios() {
                     <View key={index} style={styles.roundBox}>
                         <ThemedText type="subtitle">{usuario.nome} ({usuario.tipo})</ThemedText>
                         {/* Condição para exibir o botão "EDITAR" */}
-                        {deveExibirBotaoEditar(usuario.tipo) && (
+                        {deveExibirBotaoEditar(usuario.tipo) ? 
                             <BotaoPersonalizado 
                                 legenda="EDITAR" 
-                                href={`/(tabs)\edit_admin${usuario.nome}`} // Passa o nome do usuário como parâmetro
+                                type='defaultSemiBold'
+                                href={`../(tabs)/edit_admin?nome=${usuario.nome}`} // Passa o nome do usuário como parâmetro
                             />
-                        )}
+                        : <></>}
                     </View>
                 ))}
             </ScrollView>

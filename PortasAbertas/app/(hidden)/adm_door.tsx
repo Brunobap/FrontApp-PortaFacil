@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { Alert, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
@@ -7,19 +7,44 @@ import BlocoUsuario  from '@/components/BlocoUsuario'; // Componente de usuário
 import BarraSuperior from '@/components/BarraSuperior';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 import { objUser } from '@/constants/Types';
-import { GetAdminsRoom } from '@/scripts/api-room';
 import { useLocalSearchParams } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getDoorAdmins } from '@/scripts/api-portas';
 
 export default function AdministrarSalaScreen() {
-  const [usuarios, setUsuarios] = useState<objUser[]>([]);
+  const [usuarios, setUsuarios] = useState<objUser[] | undefined>()
+
+  const [porta, setPorta] = useState<string | undefined>("")
+  
+  const { id } = useLocalSearchParams()
+  const [codigo, setCodigo] = useState(id)
 
   // Simulação de requisição de usuários
-  useEffect(() => {
-    setUsuarios(GetAdminsRoom());
-  }, [usuarios]);
+  useEffect(() => {    
+    if (usuarios != undefined) return
+      // Pegar o token de acesso ao backend
+      AsyncStorage.getItem("accessToken").then(async token => {
+        // Pedir as portas ao backend
+        const resposta = await getDoorAdmins(token, codigo)
+        console.log(resposta);
+        
+        // Ver se elas chegaram mesmo
+        // Se o resultado não for bom, devolver um aviso            
+        if (resposta == null) {
+            // Aviso para celular
+            Alert.alert("Erro ao buscar informações.","Por favor, reinicie o aplicativo")
+            // Aviso para computador
+            alert("Erro ao buscar informações.\nPor favor, reinicie o aplicativo")
+            return
+        
+        // Se for, colocar no estado
+        }
+        setUsuarios(resposta.department.coordinators)
+        setPorta(resposta.name)
+    })
 
-  // Pegar o nome da porta pela propriedade do link
-  const { porta } = useLocalSearchParams<{ porta?: string; }>();
+  });
+
 
   return (
     <ThemedView style={styles.container}>
@@ -34,9 +59,9 @@ export default function AdministrarSalaScreen() {
         </ThemedView>
 
         {/* Lista de usuários */}
-        {usuarios.map((user) => (
+        {usuarios != undefined ? usuarios.map((user) => (
           <BlocoUsuario key={user.id} user={user} />
-        ))}
+        )) : <></>}
       </ScrollView>
     </ThemedView>
   );

@@ -9,9 +9,8 @@ import { userAdm, userAluno } from "@/constants/dummies";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Logout } from "@/scripts/api-auth";
 
-export default function SidebarMenu() {
+export default function SidebarMenu(props: {isAdmin?: boolean}) {
   const [isOpen, setIsOpen] = useState(false);
-
   function toggleMenu() { setIsOpen(!isOpen) }
 
   async function deslogar() {
@@ -42,12 +41,6 @@ export default function SidebarMenu() {
     })
   }
 
-  const [isAdmin, setIsAdmin] = useState<boolean>();
-  useEffect(() => {
-    const user = userAdm;
-    setIsAdmin(user.nivel === "administrador")
-  }, [isAdmin])
-
   return (
     <ThemedView style={{ position: "relative", zIndex: 10 }}>
       <Ionicons name="menu" onPress={toggleMenu} color={Colors.verdeClaro} size={50} />
@@ -55,12 +48,12 @@ export default function SidebarMenu() {
       {isOpen && (
         <ThemedView style={styles.menu}>
           { // Esses botões só aparecem quando tem permissão de admin
-            isAdmin ? [
-              <Link style={styles.menuItem} key={1} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Painel usuários</ThemedText></Link>,
-              <Link style={styles.menuItem} key={2} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Painel portas</ThemedText></Link>              
+            props.isAdmin === true ? [
+              <Link style={styles.menuItem} key={1} onPress={toggleMenu} href={"/painel_usuarios"}><ThemedText type="subtitle">Painel usuários</ThemedText></Link>,
+              <Link style={styles.menuItem} key={2} onPress={toggleMenu} href={"/painel_portas"}><ThemedText type="subtitle">Painel portas</ThemedText></Link>              
             ] : <></>
           }
-          <Link style={styles.menuItem} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Editar perfil</ThemedText></Link>
+          <Link style={styles.menuItem} onPress={toggleMenu} href={"/edit_user"}><ThemedText type="subtitle">Editar perfil</ThemedText></Link>
           <TouchableOpacity style={styles.menuItem} onPress={async() => await deslogar()}><ThemedText type="subtitle">Sair</ThemedText></TouchableOpacity>
         </ThemedView>
       )}
