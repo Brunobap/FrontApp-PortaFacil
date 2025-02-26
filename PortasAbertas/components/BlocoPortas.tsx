@@ -3,17 +3,17 @@ import { View } from 'react-native';
 import BotaoVazado from '@/components/BotaoPersonalizado';
 import { ThemedText } from '@/components/ThemedText';
 import { styles } from '@/constants/Styles';
-import { objPorta } from '@/constants/Types';
+import { objIOT, objSala } from '@/constants/Types';
 import { router } from 'expo-router';
 
-export default function BlocoPortas(props: {porta: objPorta}) {
-    const cor = (props.porta.status ? "green" : "red")
-    const txtStatus = (props.porta.status ? "Aberto" : "Fechado")
+export default function BlocoPortas(props: {porta: objSala}) {
+    const objPorta = props.porta.iotobjects[0]
+    const cor = (objPorta.status == "Aberto" ? "green" : "red")
 
     return (
         <View style={styles.roundBox}>
-            <ThemedText type="subtitle">{props.porta.nome} - {props.porta.local}</ThemedText>
-            <ThemedText type="subtitle" style={{color: cor}}>Status: {txtStatus}</ThemedText>
+            <ThemedText type="subtitle">{props.porta.name} - {props.porta.department.name}</ThemedText>
+            <ThemedText type="subtitle" style={{color: cor}}>Status: {objPorta.status}</ThemedText>
             <View style={{ flex: 1, flexDirection: "row" }}>
                 {[
                   props.porta.tipoAcesso === "bloq" ? <BotaoSolicitar/> : <></>,
@@ -31,7 +31,7 @@ export default function BlocoPortas(props: {porta: objPorta}) {
     function BotaoSolicitar() {
         return (
             <BotaoVazado fundo
-                href={`${props.porta.nome.toLowerCase().replace(/\s+/g, '-')}`}
+                href={`${objPorta.mac}`}
                 cor={"red"}
                 legenda="Solicitar Acesso"
                 type='defaultSemiBold'
@@ -41,7 +41,7 @@ export default function BlocoPortas(props: {porta: objPorta}) {
     function BotaoAdmin() {
         return (
             <BotaoVazado fundo
-                href={`../(hidden)/adm_door?porta=${props.porta.nome.toLowerCase().replace(/\s+/g, '-')}`}
+                href={`../(hidden)/adm_door?porta=${objPorta.mac}`}
                 cor={"blue"}
                 legenda="Administrar"
                 type='defaultSemiBold'

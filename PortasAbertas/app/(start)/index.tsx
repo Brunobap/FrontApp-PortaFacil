@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 export default function SplashScreen() {
   // Checar nas informações de persistência se o usuário já está logado
   const checarAuth = () => {
-    AsyncStorage.getItem("authUser").then((valor) => {
+    AsyncStorage.getItem("accessToken").then((valor) => {
       // Se ele já estiver pular para o painel das portas direto 
       if (typeof valor == 'string') router.navigate("/portas")   
     })
