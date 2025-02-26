@@ -24,6 +24,7 @@ export default function Portas() {
         AsyncStorage.getItem("accessToken").then(async token => {
             // Pedir as portas ao backend
             const portas = await getPortas(token)
+            console.log(portas);
             
             // Ver se elas chegaram mesmo
             // Se o resultado não for bom, devolver um aviso            

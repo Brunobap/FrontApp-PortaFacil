@@ -3,11 +3,9 @@ import { endListarPortas } from "@/constants/EndPoints"
  
 export async function getPortas(token) {    
     // Enviar a requisição para o endereço da API
-    var head = new Headers()
-    head.append("Authorization",`Bearer ${token}`)
     let valor;
     try {
-        valor = await fetch(endListarPortas, { headers: head })        
+        valor = await fetch(endListarPortas, { headers: {"Authorization":`Bearer ${token}`} })        
 
     // Não fazer nada, a mensagem de resposta vai pro console sozinha
     } catch (erro) { return }

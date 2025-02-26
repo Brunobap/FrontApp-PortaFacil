@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
 import { TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { ThemedView } from '@/components/ThemedView';
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -15,12 +14,6 @@ export default function SidebarMenu() {
 
   function toggleMenu() { setIsOpen(!isOpen) }
 
-<<<<<<< Updated upstream
-  function deslogar() {
-    setIsOpen(false);
-    AsyncStorage.multiRemove(["authUser", "nomeUsuario", "emailUsuario", "nivelUsuario"]);
-    router.navigate("/");
-=======
   async function deslogar() {
     // Fechar a caixa do menu
     setIsOpen(false)
@@ -47,19 +40,13 @@ export default function SidebarMenu() {
         router.navigate("/")
       }
     })
->>>>>>> Stashed changes
   }
 
   const [isAdmin, setIsAdmin] = useState<boolean>();
   useEffect(() => {
     const user = userAdm;
-<<<<<<< Updated upstream
-    setIsAdmin(user.nivel === "admin");
-  }, [isAdmin]);
-=======
     setIsAdmin(user.nivel === "administrador")
   }, [isAdmin])
->>>>>>> Stashed changes
 
   return (
     <ThemedView style={{ position: "relative", zIndex: 10 }}>
@@ -67,24 +54,6 @@ export default function SidebarMenu() {
 
       {isOpen && (
         <ThemedView style={styles.menu}>
-<<<<<<< Updated upstream
-          {isAdmin && (
-            <>
-              <Link style={styles.menuItem} key={1} onPress={toggleMenu} href="/(hidden)/painel_usuarios">
-                <ThemedText type="subtitle">Painel usuários</ThemedText>
-              </Link>
-              <Link style={styles.menuItem} key={2} onPress={toggleMenu} href="/(hidden)/painel_portas">
-                <ThemedText type="subtitle">Painel portas</ThemedText>
-              </Link>
-            </>
-          )}
-          <Link style={styles.menuItem} onPress={toggleMenu} href={"/(hidden)/edit_user"}>
-            <ThemedText type="subtitle">Editar perfil</ThemedText>
-          </Link>
-          <TouchableOpacity style={styles.menuItem} onPress={deslogar}>
-            <ThemedText type="subtitle">Sair</ThemedText>
-          </TouchableOpacity>
-=======
           { // Esses botões só aparecem quando tem permissão de admin
             isAdmin ? [
               <Link style={styles.menuItem} key={1} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Painel usuários</ThemedText></Link>,
@@ -93,7 +62,6 @@ export default function SidebarMenu() {
           }
           <Link style={styles.menuItem} onPress={toggleMenu} href={".."}><ThemedText type="subtitle">Editar perfil</ThemedText></Link>
           <TouchableOpacity style={styles.menuItem} onPress={async() => await deslogar()}><ThemedText type="subtitle">Sair</ThemedText></TouchableOpacity>
->>>>>>> Stashed changes
         </ThemedView>
       )}
     </ThemedView>

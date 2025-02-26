@@ -3,12 +3,36 @@ import { View } from 'react-native';
 import BotaoVazado from '@/components/BotaoPersonalizado';
 import { ThemedText } from '@/components/ThemedText';
 import { styles } from '@/constants/Styles';
-import { objIOT, objSala } from '@/constants/Types';
+import { objUser, objSala } from '@/constants/Types';
 import { router } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function BlocoPortas(props: {porta: objSala}) {
     const objPorta = props.porta.iotobjects[0]
     const cor = (objPorta.status == "Aberto" ? "green" : "red")
+    
+    // Nome do usuário, para comparação
+    var nome: string | null
+    nome = ""
+    AsyncStorage.getItem("ra").then(valor => {nome = valor})
+
+    var tipoAcesso = 'bloq'
+    for(var i=0; i<props.porta.users.length; i++) {
+        // Se a pessoa for usuário dessa porta ele tem acesso livre, pelo menos        
+        const element = props.porta.users[i].user
+        if (element == nome){
+            tipoAcesso = 'livre'
+            break
+        }
+    };
+    for(var i=0; i<props.porta.admin.length; i++) {
+        // Se a pessoa for administrador tem acesso livre a porta
+        const element = props.porta.admin[i].user
+        if (element == nome){
+            tipoAcesso = 'admin'
+            break
+        }
+    };
 
     return (
         <View style={styles.roundBox}>
@@ -16,9 +40,9 @@ export default function BlocoPortas(props: {porta: objSala}) {
             <ThemedText type="subtitle" style={{color: cor}}>Status: {objPorta.status}</ThemedText>
             <View style={{ flex: 1, flexDirection: "row" }}>
                 {[
-                  props.porta.tipoAcesso === "bloq" ? <BotaoSolicitar/> : <></>,
-                  props.porta.tipoAcesso === "livre" ? <BotaoAbrir/> : <></>,
-                  props.porta.tipoAcesso === "admin" ? [
+                  tipoAcesso === "bloq" ? <BotaoSolicitar/> : <></>,
+                  tipoAcesso === "livre" ? <BotaoAbrir/> : <></>,
+                  tipoAcesso === "admin" ? [
                     <BotaoAbrir key={1}/>,
                     <BotaoAdmin key={2}/>
                    ] : <></>,
@@ -31,7 +55,7 @@ export default function BlocoPortas(props: {porta: objSala}) {
     function BotaoSolicitar() {
         return (
             <BotaoVazado fundo
-                href={`${objPorta.mac}`}
+                href={`../(hidden)/${objPorta.mac}`}
                 cor={"red"}
                 legenda="Solicitar Acesso"
                 type='defaultSemiBold'

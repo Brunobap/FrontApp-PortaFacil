@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { Alert, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { styles } from '@/constants/Styles';
@@ -8,25 +8,41 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import BotaoPersonalizado from '@/components/BotaoPersonalizado';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CheckLogin } from '@/scripts/api-auth';
 
 export default function Login() {
-   function handlerLogar() {
+  async function handlerLogar() {
     // Fazer a verificação dos dados do usuário
+    if (id?.length == 0 || senha?.length == 0) {
+      alert("Por favor, digite todas as informações pedidas.")
+      return ;
+    }
 
     // Montar a requisição para o backend
+    const objReq = {
+      username: id,
+      password: senha
+    }
 
     // Enviar o endpoint
+    const usuario = await CheckLogin(objReq)
 
-    // Pegar o resultado como informação de autenticação e salvar com persistência
-    AsyncStorage.setItem("authUser", "alo alo")
-    // E as informações pessoais do usuário
-    AsyncStorage.setItem("nomeUsuario", "fulaneto")
-    AsyncStorage.setItem("emailUsuario", "batata@123")
-    AsyncStorage.setItem("nivelUsuario", "admin")
-
-    // Mandar ele pro painel se tiver funcionado
-    router.navigate("/(tabs)/portas")
+    // Se o resultado não for bom, devolver um aviso
+    if (usuario == null) {
+      Alert.alert("Não foi possível concluir o login.","Por favor, tente novamente.")
+      alert("Não foi possível concluir o login.\nPor favor, tente novamente.")
+    
+    } else {      
+      // Pegar o resultado como informação de autenticação e salvar com persistência
+      AsyncStorage.setItem("ra", usuario.ra)
+      AsyncStorage.setItem("accessToken", usuario.access_token)
+      AsyncStorage.setItem("refreshToken", usuario.refresh_token)      
+  
+      // Mandar ele pro painel se tiver funcionado
+      router.push("/(tabs)/portas")
+    }    
   }
+
 
   // Estados para as entradas do usuário
   const [id, setID] = useState("");
