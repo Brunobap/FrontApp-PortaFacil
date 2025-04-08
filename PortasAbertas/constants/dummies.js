@@ -1,7 +1,6 @@
 
 import { tipoAcesso } from "@/constants/Types"
 
-
 // Arquivos com objetos para simular informações requeridas
 export const arrayPortas = [
     {

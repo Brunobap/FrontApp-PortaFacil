@@ -38,7 +38,7 @@ export async function abrir(token) {
     try {
         valor = await fetch(endAbrir, {
             headers: {"Authorization":`Bearer ${token}`} 
-        })        
+        })
 
     // Não fazer nada, a mensagem de resposta vai pro console sozinha
     } catch (erro) { return }

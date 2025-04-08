@@ -6,6 +6,8 @@ import { styles } from '@/constants/Styles';
 import { objSala } from '@/constants/Types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { abrir, getStatus } from '@/scripts/api-portas';
+import { checarBiometria } from '@/scripts/biometria';
+import { router } from 'expo-router';
 
 export default function BlocoPortas(props: {porta: objSala}) {
     const objPorta = props.porta.iotobjects[0]
@@ -72,9 +74,18 @@ export default function BlocoPortas(props: {porta: objSala}) {
 
     // Tipos de botões para o card
     function BotaoSolicitar() {
+        async function PedirPorta(code: string) {
+            // Pedir a confirmação da digital da pessoa
+            const biom = await checarBiometria()
+            if (!biom) return;
+
+            // Ir para a página da porta
+            //router.navigate(`../(hidden)/${code}`)
+        }
+
         return (
             <BotaoVazado fundo
-                /*href={`../(hidden)/${props.porta.code}`}*/
+                onPress={() => PedirPorta(props.porta.code)}
                 cor={"red"}
                 legenda="Solicitar Acesso"
                 type='defaultSemiBold'
@@ -82,9 +93,18 @@ export default function BlocoPortas(props: {porta: objSala}) {
         )
     }
     function BotaoAdmin() {
+        async function AdminPorta(id: number) {
+            // Pedir a confirmação da digital da pessoa
+            const biom = await checarBiometria()
+            if (!biom) return;
+
+            // Ir para a página da porta
+            router.navigate(`../(hidden)/adm_door?id=${id}`)
+        }
+
         return (
             <BotaoVazado fundo
-                href={`../(hidden)/adm_door?id=${props.porta.id}`}
+                onPress={() => AdminPorta(props.porta.id)}
                 cor={"blue"}
                 legenda="Administrar"
                 type='defaultSemiBold'
@@ -95,6 +115,10 @@ export default function BlocoPortas(props: {porta: objSala}) {
         function AbrirPorta(id: number) {
             // Montar a requisição do backend
             AsyncStorage.getItem("accessToken").then(async token => {
+                // Pedir a confirmação da digital da pessoa
+                const biom = await checarBiometria()
+                if (!biom) return;
+
                 // Pedir as portas ao backend
                 const portas = await abrir(token)
             })

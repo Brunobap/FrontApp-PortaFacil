@@ -66,7 +66,9 @@ export default function Portas() {
 
             {/* Lista de portas */}
             <ScrollView style={styles.roundBox}>
-                {portas != undefined ? portas.map((porta) => <BlocoPortas porta={porta} />) : <ThemedText type='title'>Não há portas cadastradas para você</ThemedText>
+                {portas != undefined ?
+                    portas.map((porta) => <BlocoPortas porta={porta} />) :
+                    <ThemedText type='title'>Não há portas cadastradas para você</ThemedText>
                 }
             </ScrollView>
         </ThemedView>

@@ -45,7 +45,7 @@ export default function SplashScreen() {
   useEffect(() => {    
     // Checar os scanners sobre biometria e perguntar sobre a permissão deles
     checarBiometria()
-    checarAuth()
+    //checarAuth()
   })
 
 
